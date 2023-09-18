@@ -1,0 +1,51 @@
+version: '3.4'
+services:
+  app:
+    image: nicolkill/master_duel_card_checker_dev:latest
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    ports:
+      - 4000:4000
+    environment:
+      PORT: 4000
+      ALLOWED_SITES: "*"
+      CONFIG_SCHEMA: config.json
+
+      # db config
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DATABASE: postgres
+      POSTGRES_HOSTNAME: postgres
+
+  #  prod:
+  #    image: nicolkill/master_duel_card_checker:latest
+  #    depends_on:
+  #      - postgres
+  #    ports:
+  #      - 4001:443
+  #    volumes:
+  #      - ./prod_test.json:/app/prod_test.json
+  #    environment:
+  #      PORT: 443
+  #      ALLOWED_SITES: "*"
+  #      CONFIG_SCHEMA: prod_test.json
+  #      PHX_SERVER: true
+  #      SECRET_KEY_BASE: example_SECRET_KEY_BASE
+  #
+  #      # db config
+  #      POSTGRES_USERNAME: postgres
+  #      POSTGRES_PASSWORD: postgres
+  #      POSTGRES_DATABASE: dbb_test_prod
+  #      POSTGRES_HOSTNAME: postgres
+
+  postgres:
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 5432:5432
