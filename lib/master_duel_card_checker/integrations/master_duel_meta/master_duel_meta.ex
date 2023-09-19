@@ -3,6 +3,12 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
 
   alias MasterDuelCardChecker.Integrations.MasterDuelMeta.Card
 
+  defimpl Jason.Encoder, for: Card do
+    def encode(value, opts) do
+      Jason.Encode.map(value, opts)
+    end
+  end
+
   plug Tesla.Middleware.JSON
   plug Tesla.Middleware.BaseUrl, "https://www.masterduelmeta.com/api/v1"
 

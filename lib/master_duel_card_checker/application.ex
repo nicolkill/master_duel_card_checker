@@ -15,9 +15,10 @@ defmodule MasterDuelCardChecker.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: MasterDuelCardChecker.PubSub},
       # Start the Endpoint (http/https)
-      MasterDuelCardCheckerWeb.Endpoint
+      MasterDuelCardCheckerWeb.Endpoint,
       # Start a worker by calling: MasterDuelCardChecker.Worker.start_link(arg)
       # {MasterDuelCardChecker.Worker, arg}
+      {Oban, Application.fetch_env!(:master_duel_card_checker, Oban)}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

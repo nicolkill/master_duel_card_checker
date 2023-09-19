@@ -20,8 +20,13 @@ defmodule MasterDuelCardChecker.CardDatabaseTest do
       assert CardDatabase.get_card!(card.id) == card
     end
 
+    test "get_card_by_name!/1 returns the card with given name" do
+      card = card_fixture()
+      assert {:ok, CardDatabase.get_card_by_name(card.ycg_data["name"])} == {:ok, card}
+    end
+
     test "create_card/1 with valid data creates a card" do
-      valid_attrs = %{mdm_data: %{}, ycg_booster: ["option1", "option2"], ycg_data: %{}}
+      valid_attrs = %{name: "some name", mdm_data: %{}, ycg_booster: ["option1", "option2"], ycg_data: %{}}
 
       assert {:ok, %Card{} = card} = CardDatabase.create_card(valid_attrs)
       assert card.mdm_data == %{}
@@ -35,7 +40,7 @@ defmodule MasterDuelCardChecker.CardDatabaseTest do
 
     test "update_card/2 with valid data updates the card" do
       card = card_fixture()
-      update_attrs = %{mdm_data: %{}, ycg_booster: ["option1"], ycg_data: %{}}
+      update_attrs = %{name: "some updated name", mdm_data: %{}, ycg_booster: ["option1"], ycg_data: %{}}
 
       assert {:ok, %Card{} = card} = CardDatabase.update_card(card, update_attrs)
       assert card.mdm_data == %{}

@@ -28,4 +28,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # test adapters
 config :tesla, MasterDuelCardChecker.Integrations.MasterDuelMeta, adapter: Tesla.Mock
-#config :tesla, MasterDuelCardChecker.Integrations.YugiohCardGuide, adapter: Tesla.Mock
+config :tesla, MasterDuelCardChecker.Integrations.YugiohCardGuide, adapter: Tesla.Mock
+config :master_duel_card_checker, Oban, testing: :inline
+

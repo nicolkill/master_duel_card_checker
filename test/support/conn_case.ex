@@ -23,6 +23,7 @@ defmodule MasterDuelCardCheckerWeb.ConnCase do
       @endpoint MasterDuelCardCheckerWeb.Endpoint
 
       use MasterDuelCardCheckerWeb, :verified_routes
+      use Oban.Testing, repo: MasterDuelCardChecker.Repo
 
       # Import conveniences for testing with connections
       import Plug.Conn

@@ -9,5 +9,6 @@ defmodule MasterDuelCardCheckerWeb.Router do
     pipe_through :api
 
     get "/cards", CardController, :index
+    post "/cards/sync", CardController, :sync
   end
 end

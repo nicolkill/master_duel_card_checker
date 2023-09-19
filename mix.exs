@@ -43,7 +43,8 @@ defmodule MasterDuelCardChecker.MixProject do
       {:cors_plug, "~> 3.0"},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:ex_crawlzy, "~> 0.1.1"}
+      {:ex_crawlzy, "~> 0.1.1"},
+      {:oban, "~> 2.15"}
     ]
   end
 

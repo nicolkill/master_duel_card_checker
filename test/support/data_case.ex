@@ -18,6 +18,8 @@ defmodule MasterDuelCardChecker.DataCase do
 
   using do
     quote do
+      use Oban.Testing, repo: MasterDuelCardChecker.Repo
+
       alias MasterDuelCardChecker.Repo
 
       import Ecto

@@ -17,8 +17,14 @@ defmodule MasterDuelCardChecker.CardDatabase do
       [%Card{}, ...]
 
   """
-  def list_cards do
-    Repo.all(Card)
+  def list_cards(page \\ 0) do
+    size = 100
+    offset = page * size
+
+    Card
+    |> limit(^size)
+    |> offset(^offset)
+    |> Repo.all()
   end
 
   @doc """
@@ -36,6 +42,25 @@ defmodule MasterDuelCardChecker.CardDatabase do
 
   """
   def get_card!(id), do: Repo.get!(Card, id)
+
+  def get_card_by_name(name) do
+    card =
+      Card
+      |> where(name: ^name)
+      |> Repo.one()
+
+    case card do
+      nil ->
+        %Card{
+          name: name,
+          ycg_booster: [],
+          ycg_data: %{},
+          mdm_data: %{}
+        }
+      card ->
+        card
+    end
+  end
 
   @doc """
   Creates a card.

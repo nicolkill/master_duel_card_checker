@@ -43,7 +43,6 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
 
   defp parse_general(data) do
     %{
-      "gameId" => game_id,
       "_id" => external_id,
       "name" => name,
       "type" => type,
@@ -52,11 +51,12 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
     } = data
 
     %{
+      "gameId" => game_id,
       "konamiID" => konami_id,
       "imageHash" => image_hash,
       "ocgRelease" => ocg_release,
       "monsterType" => monster_type
-    } = optional_fields(data, ["konamiID", "imageHash", "ocgRelease", "monsterType"])
+    } = optional_fields(data, ["gameId", "konamiID", "imageHash", "ocgRelease", "monsterType"])
 
     %{
       game_id: game_id,
@@ -92,11 +92,15 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
 
   defp parse_type(%{"type" => "Monster"} = data) do
     %{
-      "level" => level,
       "attribute" => attribute,
       "atk" => atk,
       "def" => def,
     } = data
+
+    %{
+      "level" => level,
+      "scale" => scale
+    } = optional_fields(data, ["level", "scale"])
 
     %{
       level: level,

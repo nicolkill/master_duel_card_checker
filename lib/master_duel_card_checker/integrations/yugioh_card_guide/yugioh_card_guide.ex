@@ -4,13 +4,19 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
 
   alias MasterDuelCardChecker.Integrations.YugiohCardGuide.Card
 
+  defimpl Jason.Encoder, for: Card do
+    def encode(value, opts) do
+      Jason.Encode.map(value, opts)
+    end
+  end
+
   @site_url "https://www.yugiohcardguide.com"
   @booster_packs_path "/yugioh-booster-packs.html"
 
   plug Tesla.Middleware.JSON
   plug Tesla.Middleware.BaseUrl, @site_url
 
-  list_size(200)
+  list_size(300)
   list_selector("section ul.flush li")
   add_field(:name, "a:first-child", :text)
   add_field(:id, "a:first-child", :link)
@@ -37,9 +43,9 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
       get("/Templates/7new-sets-json.php", query: search)
 
     Enum.map(data, &Card.parse/1)
-  rescue
-    _ ->
-      []
+#  rescue
+#    _ ->
+#      []
   end
 
 end

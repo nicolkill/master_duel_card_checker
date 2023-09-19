@@ -11,6 +11,7 @@ defmodule MasterDuelCardChecker.CardDatabaseFixtures do
     {:ok, card} =
       attrs
       |> Enum.into(%{
+        name: "Kashtira Fenrir",
         ycg_booster: ["option1"],
         mdm_data: %{
           "game_id" => "17768",
