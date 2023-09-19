@@ -12,7 +12,9 @@ defmodule MasterDuelCardCheckerWeb.CardControllerTest do
 
     test "lists all cards", %{conn: conn} do
       conn = get(conn, ~p"/api/v1/cards")
-      assert [%{ "id" => _, "mdm_data" => %{"name" => "Kashtira Fenrir"} }] = json_response(conn, 200)["data"]
+
+      assert [%{"id" => _, "mdm_data" => %{"name" => "Kashtira Fenrir"}}] =
+               json_response(conn, 200)["data"]
     end
   end
 

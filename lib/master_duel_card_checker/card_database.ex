@@ -57,6 +57,7 @@ defmodule MasterDuelCardChecker.CardDatabase do
           ycg_data: %{},
           mdm_data: %{}
         }
+
       card ->
         card
     end

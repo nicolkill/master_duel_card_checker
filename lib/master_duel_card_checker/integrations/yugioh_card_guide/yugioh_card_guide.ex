@@ -33,7 +33,7 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
     crawl("#{@site_url}#{@booster_packs_path}")
   end
 
-  defp search(search), do: %{ set: search }
+  defp search(search), do: %{set: search}
 
   @spec list_cards(String.t()) :: [%Card{}]
   def list_cards(set) do
@@ -43,9 +43,8 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
       get("/Templates/7new-sets-json.php", query: search)
 
     Enum.map(data, &Card.parse/1)
-#  rescue
-#    _ ->
-#      []
+    #  rescue
+    #    _ ->
+    #      []
   end
-
 end

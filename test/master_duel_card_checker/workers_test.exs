@@ -16,7 +16,8 @@ defmodule WorkersTest do
               "__v" => 0,
               "_id" => "62de1eaae9066c4257aa9526",
               "deckTypes" => [],
-              "description" => "At the start of your Main Phase 1: Apply 1 of the following effects until the end of your opponent's turn.\n● Neither player can activate card effects in the GY.\n● Neither player can banish cards from the GY.\n● Neither player can Special Summon monsters from the GYs.",
+              "description" =>
+                "At the start of your Main Phase 1: Apply 1 of the following effects until the end of your opponent's turn.\n● Neither player can activate card effects in the GY.\n● Neither player can banish cards from the GY.\n● Neither player can Special Summon monsters from the GYs.",
               "gameId" => 17727,
               "imageHash" => "crc32c=DZt9sQ==, md5=rKEsdxcjsh/3sRDnBBeQ4w==",
               "isUpdated" => true,
@@ -51,7 +52,8 @@ defmodule WorkersTest do
               "attribute" => "LIGHT",
               "deckTypes" => ["Galaxy Photon"],
               "def" => 1000,
-              "description" => "If this card is sent to the GY, except from the field, while another \"Photon\" or \"Galaxy\" monster is on your field or in your GY: You can Special Summon this card in Defense Position. You can only use this effect of \"Photon Emperor\" once per turn. After you Normal or Special Summon this card, you can Normal Summon 1 LIGHT monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.)",
+              "description" =>
+                "If this card is sent to the GY, except from the field, while another \"Photon\" or \"Galaxy\" monster is on your field or in your GY: You can Special Summon this card in Defense Position. You can only use this effect of \"Photon Emperor\" once per turn. After you Normal or Special Summon this card, you can Normal Summon 1 LIGHT monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.)",
               "gameId" => "18146",
               "imageHash" => "crc32c=o0dYgQ==, md5=EDvx+xsqEQlC+XooLVgUug==",
               "isUpdated" => true,
@@ -86,7 +88,8 @@ defmodule WorkersTest do
               "attribute" => "LIGHT",
               "deckTypes" => ["Galaxy Photon"],
               "def" => 1400,
-              "description" => "If this card is Normal or Special Summoned: You can target 1 \"Photon\" or \"Galaxy\" monster in your GY, except \"Galaxy Summoner\"; Special Summon it in Defense Position. You can target 1 other LIGHT monster you control; it becomes Level 4 until the end of this turn. You can only use each effect of \"Galaxy Summoner\" once per turn.",
+              "description" =>
+                "If this card is Normal or Special Summoned: You can target 1 \"Photon\" or \"Galaxy\" monster in your GY, except \"Galaxy Summoner\"; Special Summon it in Defense Position. You can target 1 other LIGHT monster you control; it becomes Level 4 until the end of this turn. You can only use each effect of \"Galaxy Summoner\" once per turn.",
               "gameId" => "18147",
               "imageHash" => "crc32c=KTPCYQ==, md5=gvEFFdDw5ZkPtj8VHUbn1A==",
               "isUpdated" => true,
@@ -115,6 +118,7 @@ defmodule WorkersTest do
             }
           ]
         }
+
       %{method: :get, url: "https://www.yugiohcardguide.com/Templates/7new-sets-json.php" <> _} ->
         %Tesla.Env{
           status: 200,
@@ -122,7 +126,8 @@ defmodule WorkersTest do
             %{
               "cd_atk" => "",
               "cd_attribute" => "",
-              "cd_card_text" => "At the start of your Main Phase 1: Apply 1 of the following effects until the end of your opponent's turn.<br><li>Neither player can activate card effects in the GY.<br><li>Neither player can activate card effects in the GY.<br><li>Neither player can Special Summon monsters from the GYs.",
+              "cd_card_text" =>
+                "At the start of your Main Phase 1: Apply 1 of the following effects until the end of your opponent's turn.<br><li>Neither player can activate card effects in the GY.<br><li>Neither player can activate card effects in the GY.<br><li>Neither player can Special Summon monsters from the GYs.",
               "cd_def" => "",
               "cd_effect" => "",
               "cd_id" => "PHHY-EN000",
@@ -142,7 +147,8 @@ defmodule WorkersTest do
             %{
               "cd_atk" => "2800",
               "cd_attribute" => "Light",
-              "cd_card_text" => "If this card is sent to the GY, except from the field, while another \"Photon\" or \"Galaxy\" monster is on your field or in your GY: You can Special Summon this card in Defense Position. You can only use this effect of \"Photon Emperor\" once per turn. After you Normal or Special Summon this card, you can Normal Summon 1 LIGHT monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.)",
+              "cd_card_text" =>
+                "If this card is sent to the GY, except from the field, while another \"Photon\" or \"Galaxy\" monster is on your field or in your GY: You can Special Summon this card in Defense Position. You can only use this effect of \"Photon Emperor\" once per turn. After you Normal or Special Summon this card, you can Normal Summon 1 LIGHT monster during your Main Phase this turn, in addition to your Normal Summon/Set. (You can only gain this effect once per turn.)",
               "cd_def" => "1000",
               "cd_effect" => "",
               "cd_id" => "PHHY-EN001",
@@ -162,7 +168,8 @@ defmodule WorkersTest do
             %{
               "cd_atk" => "1600",
               "cd_attribute" => "Light",
-              "cd_card_text" => "If this card is Normal or Special Summoned: You can target 1 \"Photon\" or \"Galaxy\" monster in your GY, except \"Galaxy Summoner\"; Special Summon it in Defense Position. You can target 1 other LIGHT monster you control; it becomes Level 4 until the end of this turn. You can only use each effect of \"Galaxy Summoner\" once per turn.",
+              "cd_card_text" =>
+                "If this card is Normal or Special Summoned: You can target 1 \"Photon\" or \"Galaxy\" monster in your GY, except \"Galaxy Summoner\"; Special Summon it in Defense Position. You can target 1 other LIGHT monster you control; it becomes Level 4 until the end of this turn. You can only use each effect of \"Galaxy Summoner\" once per turn.",
               "cd_def" => "1400",
               "cd_effect" => "",
               "cd_id" => "PHHY-EN002",
@@ -190,15 +197,15 @@ defmodule WorkersTest do
     booster = "photon-hypernova-booster-pack"
     assert :ok = perform_job(MasterDuelCardChecker.Workers.BoosterSync, %{booster_id: booster})
     assert [%Card{name: "Gravekeeper's Inscription"} = card | _] = CardDatabase.list_cards(0)
+
     assert %Card{
              name: "Gravekeeper's Inscription",
              ycg_data: %{
-               "name" => "Gravekeeper's Inscription",
+               "name" => "Gravekeeper's Inscription"
              },
              mdm_data: %{
-               "name" => "Gravekeeper's Inscription",
+               "name" => "Gravekeeper's Inscription"
              }
            } = card
   end
-
 end

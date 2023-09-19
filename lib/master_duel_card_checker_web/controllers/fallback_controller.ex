@@ -18,7 +18,10 @@ defmodule MasterDuelCardCheckerWeb.FallbackController do
   def call(conn, {:error, :not_found}) do
     conn
     |> put_status(:not_found)
-    |> put_view(html: MasterDuelCardCheckerWeb.ErrorHTML, json: MasterDuelCardCheckerWeb.ErrorJSON)
+    |> put_view(
+      html: MasterDuelCardCheckerWeb.ErrorHTML,
+      json: MasterDuelCardCheckerWeb.ErrorJSON
+    )
     |> render(:"404")
   end
 end

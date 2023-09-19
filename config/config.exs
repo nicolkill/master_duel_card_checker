@@ -35,7 +35,7 @@ allowed_sites =
     |> String.split(",")
 
 config :cors_plug,
-       origin: allowed_sites
+  origin: allowed_sites
 
 config :tesla, adapter: Tesla.Adapter.Hackney
 

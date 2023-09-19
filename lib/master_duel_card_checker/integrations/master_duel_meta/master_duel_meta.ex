@@ -12,14 +12,15 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
   plug Tesla.Middleware.JSON
   plug Tesla.Middleware.BaseUrl, "https://www.masterduelmeta.com/api/v1"
 
-  defp search(search), do: %{ search: search }
+  defp search(search), do: %{search: search}
+
   defp pagination(page),
-       do: %{
-         limit: 100,
-         page: page,
-         aggregate: "search",
-         cardSort: "popRank"
-       }
+    do: %{
+      limit: 100,
+      page: page,
+      aggregate: "search",
+      cardSort: "popRank"
+    }
 
   @spec list_cards(String.t(), integer()) :: [%Card{}]
   def list_cards(search, page \\ 1) do
@@ -36,5 +37,4 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
     _ ->
       []
   end
-
 end

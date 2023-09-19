@@ -19,6 +19,7 @@ defmodule YugiohCardGuideTest do
           status: 200,
           body: boosters_content
         }
+
       %{method: :get, url: "https://www.yugiohcardguide.com/Templates/7new-sets-json.php" <> _} ->
         %Tesla.Env{
           status: 200,
@@ -51,7 +52,8 @@ defmodule YugiohCardGuideTest do
   end
 
   test "get list of booster packs" do
-    assert [%{name: "25th Anniversary Tin: Dueling Heroes Mega Pack"} | _] = YugiohCardGuide.get_booster_packs()
+    assert [%{name: "25th Anniversary Tin: Dueling Heroes Mega Pack"} | _] =
+             YugiohCardGuide.get_booster_packs()
   end
 
   test "list cards of selected booster" do

@@ -1,5 +1,4 @@
 defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
-
   alias MasterDuelCardChecker.Integrations.MasterDuelMeta.Card
 
   @keys [
@@ -39,7 +38,8 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
     |> then(&struct(Card, &1))
   end
 
-  defp optional_fields(data, fields), do: Enum.reduce(fields, %{}, &Map.put(&2, &1, Map.get(data, &1)))
+  defp optional_fields(data, fields),
+    do: Enum.reduce(fields, %{}, &Map.put(&2, &1, Map.get(data, &1)))
 
   defp parse_general(data) do
     %{
@@ -74,7 +74,7 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
   defp parse_rarity(%{"rarity" => rarity} = data) do
     %{
       "release" => release,
-      "obtain" => release_packs,
+      "obtain" => release_packs
     } = data
 
     %{
@@ -88,13 +88,14 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
       ban_status: ban_status
     }
   end
+
   defp parse_rarity(_), do: %{}
 
   defp parse_type(%{"type" => "Monster"} = data) do
     %{
       "attribute" => attribute,
       "atk" => atk,
-      "def" => def,
+      "def" => def
     } = data
 
     %{
@@ -109,6 +110,6 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
       def: def
     }
   end
-  defp parse_type(_), do: %{}
 
+  defp parse_type(_), do: %{}
 end

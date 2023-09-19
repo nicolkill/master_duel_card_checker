@@ -31,7 +31,6 @@ defmodule MasterDuelCardChecker.CardDatabaseFixtures do
           "attribute" => "EARTH",
           "atk" => 2400,
           "def" => 2400
-
         },
         ycg_data: %{
           "name" => "Kashtira Fenrir",

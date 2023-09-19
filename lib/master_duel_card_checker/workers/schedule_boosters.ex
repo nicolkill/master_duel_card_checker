@@ -22,5 +22,4 @@ defmodule MasterDuelCardChecker.Workers.ScheduleBoosters do
     |> new()
     |> Oban.insert()
   end
-
 end

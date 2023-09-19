@@ -14,14 +14,18 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
     case {mdm_card, card} do
       {nil, _} ->
         transaction
+
       {_, %Card{mdm_data: %{"rarity" => nil}}} ->
         transaction
+
       {mdm_card, card} ->
-        card = CardDatabase.change_card(card, %{
-          ycg_booster: Enum.dedup(card.ycg_booster ++ ycg_card.release_packs),
-          ycg_data: ycg_card,
-          mdm_data: mdm_card
-        })
+        card =
+          CardDatabase.change_card(card, %{
+            ycg_booster: Enum.dedup(card.ycg_booster ++ ycg_card.release_packs),
+            ycg_data: ycg_card,
+            mdm_data: mdm_card
+          })
+
         Ecto.Multi.insert_or_update(
           transaction,
           "upsert_#{ycg_card.name}",
@@ -62,5 +66,4 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
     |> new(max_attempts: 5, schedule_in: delay)
     |> Oban.insert()
   end
-  
 end

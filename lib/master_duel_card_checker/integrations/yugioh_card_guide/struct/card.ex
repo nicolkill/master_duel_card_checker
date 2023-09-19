@@ -1,5 +1,4 @@
 defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
-
   alias MasterDuelCardChecker.Integrations.YugiohCardGuide.Card
 
   @keys [
@@ -42,5 +41,4 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
     }
     |> then(&struct(Card, &1))
   end
-
 end
