@@ -22,7 +22,6 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
   @monster_keys [
     :level,
     :attribute,
-    :monster_type,
     :atk,
     :def
   ]
@@ -55,8 +54,9 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
     %{
       "konamiID" => konami_id,
       "imageHash" => image_hash,
-      "ocgRelease" => ocg_release
-    } = optional_fields(data, ["konamiID", "imageHash", "ocgRelease"])
+      "ocgRelease" => ocg_release,
+      "monsterType" => monster_type
+    } = optional_fields(data, ["konamiID", "imageHash", "ocgRelease", "monsterType"])
 
     %{
       game_id: game_id,
@@ -64,7 +64,7 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
       image_hash: image_hash,
       konami_id: konami_id,
       name: name,
-      type: type,
+      type: Enum.join([type] ++ monster_type, " "),
       race: race,
       description: description,
       ocg_release: ocg_release
@@ -94,7 +94,6 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
     %{
       "level" => level,
       "attribute" => attribute,
-      "monsterType" => monster_type,
       "atk" => atk,
       "def" => def,
     } = data
@@ -102,7 +101,6 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
     %{
       level: level,
       attribute: attribute,
-      monster_type: monster_type,
       atk: atk,
       def: def
     }

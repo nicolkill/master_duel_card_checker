@@ -3,8 +3,8 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
 
   alias MasterDuelCardChecker.Integrations.MasterDuelMeta.Card
 
-  plug Tesla.Middleware.BaseUrl, "https://www.masterduelmeta.com/api/v1"
   plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.BaseUrl, "https://www.masterduelmeta.com/api/v1"
 
   defp search(search), do: %{ search: search }
   defp pagination(page),
@@ -15,7 +15,7 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
          cardSort: "popRank"
        }
 
-  @spec list_cards(String.t(), integer()) :: any()
+  @spec list_cards(String.t(), integer()) :: [%Card{}]
   def list_cards(search, page \\ 1) do
     search = search(search)
     pagination = pagination(page)
