@@ -37,9 +37,9 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
       get("/Templates/7new-sets-json.php", query: search)
 
     Enum.map(data, &Card.parse/1)
-#  rescue
-#    _ ->
-#      []
+  rescue
+    _ ->
+      []
   end
 
 end

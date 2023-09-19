@@ -5,7 +5,9 @@ defmodule MasterDuelCardCheckerWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", MasterDuelCardCheckerWeb do
+  scope "/api/v1", MasterDuelCardCheckerWeb do
     pipe_through :api
+
+    get "/cards", CardController, :index
   end
 end
