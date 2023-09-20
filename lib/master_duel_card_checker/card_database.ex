@@ -8,6 +8,15 @@ defmodule MasterDuelCardChecker.CardDatabase do
 
   alias MasterDuelCardChecker.CardDatabase.Card
 
+  defp card_query_paginated(page) do
+    size = 100
+    offset = page * size
+
+    Card
+    |> limit(^size)
+    |> offset(^offset)
+  end
+
   @doc """
   Returns the list of cards.
 
@@ -18,12 +27,16 @@ defmodule MasterDuelCardChecker.CardDatabase do
 
   """
   def list_cards(page \\ 0) do
-    size = 100
-    offset = page * size
+    page
+    |> card_query_paginated()
+    |> Repo.all()
+  end
 
-    Card
-    |> limit(^size)
-    |> offset(^offset)
+  @spec list_cards_by_booster(String.t(), integer()) :: [%Card{}]
+  def list_cards_by_booster(booster, page \\ 0) do
+    page
+    |> card_query_paginated()
+    |> where([c], ^booster in c.ycg_booster)
     |> Repo.all()
   end
 

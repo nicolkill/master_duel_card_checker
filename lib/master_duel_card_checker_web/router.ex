@@ -8,6 +8,7 @@ defmodule MasterDuelCardCheckerWeb.Router do
   scope "/api/v1", MasterDuelCardCheckerWeb do
     pipe_through :api
 
+    get "/boosters", CardController, :boosters
     get "/cards", CardController, :index
     post "/cards/sync", CardController, :sync
   end

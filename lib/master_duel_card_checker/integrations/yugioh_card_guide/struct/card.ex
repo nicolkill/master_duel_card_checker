@@ -25,7 +25,7 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
       "cd_atk" => atk,
       "cd_def" => def,
       "cd_card_text" => description,
-      "set_name" => release_pack
+      "set_seo_name" => release_pack
     } = data
 
     %{
