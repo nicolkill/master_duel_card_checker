@@ -53,11 +53,11 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
     end)
 
     :ok
-#  rescue
-#    e ->
-#      IO.inspect(e, label: "booster sync error")
-#
-#      {:snooze, 10}
+    #  rescue
+    #    e ->
+    #      IO.inspect(e, label: "booster sync error")
+    #
+    #      {:snooze, 10}
   end
 
   @impl Oban.Worker
