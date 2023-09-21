@@ -6,7 +6,7 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
 
   defimpl Jason.Encoder, for: Card do
     def encode(value, opts) do
-      Jason.Encode.map(value, opts)
+      Jason.Encode.map(Map.drop(value, [:__struct__]), opts)
     end
   end
 

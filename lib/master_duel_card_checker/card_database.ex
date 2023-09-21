@@ -8,6 +8,12 @@ defmodule MasterDuelCardChecker.CardDatabase do
 
   alias MasterDuelCardChecker.CardDatabase.Card
 
+  defimpl Jason.Encoder, for: Card do
+    def encode(value, opts) do
+      Jason.Encode.map(Map.drop(value, [:__meta__, :__struct__]), opts)
+    end
+  end
+
   defp card_query_paginated(page) do
     size = 100
     offset = page * size
@@ -15,6 +21,7 @@ defmodule MasterDuelCardChecker.CardDatabase do
     Card
     |> limit(^size)
     |> offset(^offset)
+    |> order_by(asc: :name)
   end
 
   @doc """
@@ -67,8 +74,8 @@ defmodule MasterDuelCardChecker.CardDatabase do
         %Card{
           name: name,
           ycg_booster: [],
-          ycg_data: %{},
-          mdm_data: %{}
+          ycg_data: nil,
+          mdm_data: nil
         }
 
       card ->

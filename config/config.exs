@@ -42,7 +42,7 @@ config :tesla, adapter: Tesla.Adapter.Hackney
 config :master_duel_card_checker, Oban,
   repo: MasterDuelCardChecker.Repo,
   plugins: [
-    Oban.Plugins.Pruner
+#    Oban.Plugins.Pruner
   ],
   queues: [default: 10]
 

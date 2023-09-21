@@ -5,7 +5,7 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta do
 
   defimpl Jason.Encoder, for: Card do
     def encode(value, opts) do
-      Jason.Encode.map(value, opts)
+      Jason.Encode.map(Map.drop(value, [:__struct__, :external_id, :game_id, :image_hash]), opts)
     end
   end
 

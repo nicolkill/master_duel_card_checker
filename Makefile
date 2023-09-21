@@ -41,6 +41,9 @@ migrate:
 format:
 	docker compose exec app mix format
 
+generate_js:
+	docker compose exec app mix generate_js
+
 prod_image:
 	docker build --no-cache --build-arg MIX_ENV=prod -t ${IMAGE_TAG}:${REVISION} .
 	docker tag ${IMAGE_TAG}:${REVISION} ${IMAGE_TAG}:latest

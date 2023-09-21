@@ -1,4 +1,4 @@
-defmodule WorkersTest do
+defmodule MasterDuelCardChecker.WorkersTest do
   use MasterDuelCardChecker.DataCase
 
   alias MasterDuelCardChecker.CardDatabase
@@ -195,16 +195,16 @@ defmodule WorkersTest do
 
   test "sync booster packs" do
     booster = "photon-hypernova-booster-pack"
-    assert :ok = perform_job(MasterDuelCardChecker.Workers.BoosterSync, %{booster_id: booster})
-    assert [%Card{name: "Gravekeeper's Inscription"} = card | _] = CardDatabase.list_cards(0)
+    assert {:ok, [3]} = perform_job(MasterDuelCardChecker.Workers.BoosterSync, %{booster_id: booster})
+    assert [%Card{name: "Galaxy Summoner"} = card | _] = CardDatabase.list_cards(0)
 
     assert %Card{
-             name: "Gravekeeper's Inscription",
+             name: "Galaxy Summoner",
              ycg_data: %{
-               "name" => "Gravekeeper's Inscription"
+               "name" => "Galaxy Summoner"
              },
              mdm_data: %{
-               "name" => "Gravekeeper's Inscription"
+               "name" => "Galaxy Summoner"
              }
            } = card
   end

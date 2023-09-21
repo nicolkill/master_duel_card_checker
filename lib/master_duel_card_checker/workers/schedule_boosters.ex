@@ -6,12 +6,14 @@ defmodule MasterDuelCardChecker.Workers.ScheduleBoosters do
   @impl Oban.Worker
   def perform(_args) do
     YugiohCardGuide.get_booster_packs()
-    |> Enum.take(10)
+    |> Enum.take(20)
     |> Enum.reduce(0, fn %{id: booster_id}, delay ->
       MasterDuelCardChecker.Workers.BoosterSync.enqueue_job(booster_id, delay)
 
       delay + 10
     end)
+
+    :ok
   end
 
   @impl Oban.Worker

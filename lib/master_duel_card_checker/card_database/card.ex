@@ -2,7 +2,8 @@ defmodule MasterDuelCardChecker.CardDatabase.Card do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @keys [:name, :mdm_data, :ycg_data, :ycg_booster]
+  @required_keys [:name, :ycg_data, :ycg_booster]
+  @keys [:mdm_data] ++ @required_keys
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -19,6 +20,6 @@ defmodule MasterDuelCardChecker.CardDatabase.Card do
   def changeset(card, attrs) do
     card
     |> cast(attrs, @keys)
-    |> validate_required(@keys)
+    |> validate_required(@required_keys)
   end
 end
