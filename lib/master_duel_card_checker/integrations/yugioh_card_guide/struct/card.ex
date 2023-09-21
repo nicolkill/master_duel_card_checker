@@ -10,7 +10,9 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
     :level,
     :attribute,
     :atk,
-    :def
+    :def,
+    :booster_set,
+    :booster_card_id
   ]
   @enforce_keys []
   defstruct @keys ++ @enforce_keys
@@ -25,7 +27,9 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
       "cd_atk" => atk,
       "cd_def" => def,
       "cd_card_text" => description,
-      "set_seo_name" => release_pack
+      "set_seo_name" => release_pack,
+      "cd_set" => booster_set,
+      "cd_id" => booster_card_id
     } = data
 
     %{
@@ -37,6 +41,8 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide.Card do
       atk: atk,
       def: def,
       description: description,
+      booster_set: booster_set,
+      booster_card_id: booster_card_id,
       release_packs: [release_pack]
     }
     |> then(&struct(Card, &1))

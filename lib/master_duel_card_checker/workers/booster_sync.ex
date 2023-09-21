@@ -11,24 +11,23 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
     mdm_card = Enum.find(mdm_cards, &(&1.name == ycg_card.name))
     card = CardDatabase.get_card_by_name(ycg_card.name)
 
-    card =
-      case card do
-        %Card{mdm_data: %{"rarity" => rarity}} when not is_nil(rarity) ->
-          transaction
-        card ->
-          card =
-            CardDatabase.change_card(card, %{
-              ycg_booster: Enum.dedup(card.ycg_booster ++ ycg_card.release_packs),
-              ycg_data: ycg_card,
-              mdm_data: mdm_card
-            })
+    case card do
+      %Card{mdm_data: %{"rarity" => rarity}} when not is_nil(rarity) ->
+        transaction
+      card ->
+        card =
+          CardDatabase.change_card(card, %{
+            ycg_booster: Enum.dedup(card.ycg_booster ++ ycg_card.release_packs),
+            ycg_data: ycg_card,
+            mdm_data: mdm_card
+          })
 
-          Ecto.Multi.insert_or_update(
-            transaction,
-            "upsert_#{ycg_card.name}",
-            card
-          )
-      end
+        Ecto.Multi.insert_or_update(
+          transaction,
+          "upsert_#{ycg_card.name}",
+          card
+        )
+    end
   end
 
   @impl Oban.Worker
@@ -40,9 +39,7 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
       |> Enum.map(fn ycg_cards ->
         mdm_cards =
           ycg_cards
-          |> Enum.map(fn %YugiohCardGuideCard{name: name} ->
-            name
-          end)
+          |> Enum.map(&String.replace(&1.name, " - ", " – "))
           |> Enum.join("|")
           |> MasterDuelMeta.list_cards()
 
@@ -57,15 +54,10 @@ defmodule MasterDuelCardChecker.Workers.BoosterSync do
       end)
 
     {:ok, result}
-    #  rescue
-    #    e ->
-    #      IO.inspect(e, label: "booster sync error")
-    #
-    #      {:snooze, 10}
   end
 
   @impl Oban.Worker
-  def timeout(_job), do: :timer.seconds(30)
+  def timeout(_job), do: :timer.seconds(60 * 2)
 
   def enqueue_job(booster_id, delay) do
     %{booster_id: booster_id}

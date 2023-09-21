@@ -93,15 +93,15 @@ defmodule MasterDuelCardChecker.Integrations.MasterDuelMeta.Card do
 
   defp parse_type(%{"type" => "Monster"} = data) do
     %{
-      "attribute" => attribute,
-      "atk" => atk,
-      "def" => def
+      "attribute" => attribute
     } = data
 
     %{
       "level" => level,
-      "scale" => scale
-    } = optional_fields(data, ["level", "scale"])
+      "scale" => scale,
+      "atk" => atk,
+      "def" => def
+    } = optional_fields(data, ["level", "scale", "atk", "def"])
 
     %{
       level: level,

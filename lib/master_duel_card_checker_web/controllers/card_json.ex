@@ -23,9 +23,13 @@ defmodule MasterDuelCardCheckerWeb.CardJSON do
     %{data: data(booster)}
   end
 
-  def generate_image(%{"external_id" => external_id}) do
+  def generate_image(%Card{mdm_data: %{"external_id" => external_id}}) do
     "https://s3.duellinksmeta.com/cards/#{external_id}_w420.webp"
   end
+  def generate_image(%Card{ycg_data: %{"booster_set" => booster_set, "booster_card_id" => booster_card_id}}),
+      do: "https://ycg.chakra42.net/images/#{String.downcase(booster_set)}/#{booster_card_id}.jpg"
+  def generate_image(_),
+      do: "https://www.mtgmexico.com/cdn/shop/products/16d296ba-1f3f-5d28-9278-ff639020e39b_6d5ad9a4-aeff-4dfa-ad46-59480bc083ee_800x.jpg"
 
   defp data(%Card{} = card) do
     %{
@@ -34,7 +38,7 @@ defmodule MasterDuelCardCheckerWeb.CardJSON do
       ycg_booster: card.ycg_booster,
       mdm_data: Map.drop(card.mdm_data, ["__struct__", "external_id", "game_id", "image_hash"]),
       ycg_data: Map.drop(card.ycg_data, ["__struct__"]),
-      card_image: generate_image(card.mdm_data),
+      card_image: generate_image(card),
       master_duel_released: !is_nil(card.mdm_data) and !is_nil(card.mdm_data["rarity"])
     }
   end

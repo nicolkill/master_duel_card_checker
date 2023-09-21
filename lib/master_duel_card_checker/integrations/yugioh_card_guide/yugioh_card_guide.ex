@@ -31,6 +31,7 @@ defmodule MasterDuelCardChecker.Integrations.YugiohCardGuide do
 
   def get_booster_packs() do
     crawl("#{@site_url}#{@booster_packs_path}")
+    |> Enum.dedup_by(& &1.id)
     |> Enum.with_index()
     |> Enum.map(&Map.put(elem(&1, 0), :index, elem(&1, 1)))
   end
