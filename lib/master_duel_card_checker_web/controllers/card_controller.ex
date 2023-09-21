@@ -27,4 +27,10 @@ defmodule MasterDuelCardCheckerWeb.CardController do
 
     json(conn, %{result: "ok"})
   end
+
+  def update(conn, _params) do
+    MasterDuelCardChecker.Workers.MdmSync.start_job()
+
+    json(conn, %{result: "ok"})
+  end
 end

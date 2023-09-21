@@ -47,6 +47,14 @@ defmodule MasterDuelCardChecker.CardDatabase do
     |> Repo.all()
   end
 
+  @spec list_cards_by_booster(String.t(), integer()) :: [%Card{}]
+  def list_cards_by_not_sync(page \\ 0) do
+    page
+    |> card_query_paginated()
+    |> where([c], is_nil(c.mdm_data))
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single card.
 
